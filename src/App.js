@@ -1,11 +1,13 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from "react";
+import "./App.css";
 
 function App() {
+
+  const [counter, setCounter] = useState(0);
+
   return (
-    <div className="App">
-     <h1>TDD DEMO APP</h1>
+    <div className="App" data-testid="component-app">
+      <h1>TDD DEMO - CLICK COUNTER APP</h1>
     </div>
   );
 }
