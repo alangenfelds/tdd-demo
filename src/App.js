@@ -5,13 +5,26 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      counter: 0
+      counter: 0,
+      error: null
     };
   }
 
   increment = () => {
     this.setState({
-      counter: this.state.counter + 1
+      counter: this.state.counter + 1,
+      error: null
+    });
+  }
+
+  decrement() {
+    if (this.state.counter === 0) {
+      return this.setState({
+        error: 'The counter cannot go below 0'
+      });
+    }
+    this.setState({
+      counter: this.state.counter - 1
     });
   }
 
@@ -84,14 +97,14 @@ class App extends React.Component {
       return func(total);
     }, 1);
 
-    console.log("sum", sum);
-    console.log("doubled", doubled);
-    console.log("fruitCatalog", fruitCatalog);
-    console.log("colors", colors);
-    console.log("uniqueColors", uniqueColors);
-    console.log("function pipeline result", result);
+    // console.log("sum", sum);
+    // console.log("doubled", doubled);
+    // console.log("fruitCatalog", fruitCatalog);
+    // console.log("colors", colors);
+    // console.log("uniqueColors", uniqueColors);
+    // console.log("function pipeline result", result);
 
-    const { counter } = this.state;
+    const { counter, error } = this.state;
 
     return (
       <div className="App" data-testid="component-app">
@@ -102,6 +115,12 @@ class App extends React.Component {
         <button data-testid="increment-button" onClick={this.increment}>
           Increment
         </button>
+        <br></br>
+        <br></br>
+        <button data-testid="decrement-button" onClick={this.decrement.bind(this)}>
+          Decrement
+        </button>
+        {error && <h1 style={{ color: 'red' }} data-testid="error-message">{error}</h1>}
       </div>
     );
   }
